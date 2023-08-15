@@ -1,53 +1,182 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f4f4f4;
-}
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f4f4f4;
+    }
 
-.game-container {
-    display: grid;
-    grid-template-columns: repeat(3, 120px);
-    grid-gap: 5px;
-    border: 5px solid #333;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-}
+    .input-container {
+        text-align: center;
+        margin-top: 20px;
+    }
 
-.cell {
-    width: 120px;
-    height: 120px;
-    border: 2px solid #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 36px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+    #player1-name,
+    #player2-name {
+        font-size: 18px;
+        padding: 5px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
 
-.cell:hover {
-    background-color: #f0f0f0;
-}
+    #start-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
 
-/* Add a hover effect for player's symbols */
-.cell:hover::before {
-    content: attr(data-symbol);
-    position: absolute;
-    font-size: 36px;
-    opacity: 0.2;
-}
+    #start-button:hover {
+        background-color: #0056b3;
+    }
 
-/* Add a winning line highlight */
-.winning-line {
-    position: absolute;
-    background-color: rgba(200, 200, 200, 0.5);
-    z-index: -1;
-    border-radius: 10px;
-}
+    .game-container {
+        display: grid;
+        grid-template-columns: repeat(3, 120px);
+        grid-gap: 5px;
+        border: 5px solid #333;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    .cell {
+        width: 120px;
+        height: 120px;
+        border: 2px solid #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 36px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        position: relative;
+    }
+
+    .cell::before {
+        content: attr(data-symbol);
+        position: absolute;
+        font-size: 36px;
+        opacity: 0.2;
+    }
+
+    .cell:hover {
+        background-color: #f0f0f0;
+    }
+
+    .result-message {
+        text-align: center;
+        font-size: 24px;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    .theme-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    #theme-select {
+        font-size: 16px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Default Theme */
+    body.theme-default {
+        --primary-bg-color: #f4f4f4;
+        --board-bg-color: #fff;
+        --cell-border-color: #333;
+        --player-input-bg-color: #fff;
+        --button-bg-color: #007bff;
+        --button-hover-color: #0056b3;
+        --result-font-color: #000;
+    }
+
+    /* Dark Theme */
+    body.theme-dark {
+        --primary-bg-color: #333;
+        --board-bg-color: #222;
+        --cell-border-color: #444;
+        --player-input-bg-color: #333;
+        --button-bg-color: #444;
+        --button-hover-color: #333;
+        --result-font-color: #fff;
+    }
+
+    /* Light Theme */
+    body.theme-light {
+        --primary-bg-color: #fff;
+        --board-bg-color: #f4f4f4;
+        --cell-border-color: #ccc;
+        --player-input-bg-color: #fff;
+        --button-bg-color: #007bff;
+        --button-hover-color: #0056b3;
+        --result-font-color: #000;
+    }
+
+    /* Apply theme styles */
+    body {
+        background-color: var(--primary-bg-color);
+    }
+
+    .game-container {
+        display: grid;
+        grid-template-columns: repeat(3, 120px);
+        grid-gap: 5px;
+        border: 5px solid #333;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        margin-top: 20px;
+        border: 5px solid var(--cell-border-color);
+        background-color: var(--board-bg-color);
+    }
+
+    #player1-name,
+    #player2-name {
+        font-size: 18px;
+        padding: 5px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: var(--player-input-bg-color);
+    }
+
+    #start-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        background-color: var(--button-bg-color);
+    }
+
+    #start-button:hover {
+        background-color: #0056b3;
+        background-color: var(--button-hover-color);
+    }
+
+    .result-message {
+        text-align: center;
+        font-size: 24px;
+        margin-top: 10px;
+        font-weight: bold;
+        color: var(--result-font-color);
+    }
